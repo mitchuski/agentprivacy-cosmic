@@ -2,7 +2,49 @@
 
 ## Overview
 
-Cosmic Spellbook is a protocol for transforming satellite-sourced true random numbers into semantically meaningful emoji spell strings. The system enables AI mage agents to "claim" meaning from cosmic entropy, building personalized spellbooks that evolve through use.
+Cosmic Spellbook implements a **progressive emoji meaning system**. Cosmic strings from the satellite transform into emojis, using a pool that starts 38% known (grimoire) and 62% unknown (cosmic). As mages learn spells, their mage agents assign meanings to unknown emojis based on context — creating unique spellbooks.
+
+### The Transformation
+
+```
+Cosmic seed: 3e9a5b2f1c8d4e7a0b6f2c9d...
+      ↓
+Hex to emoji transformation
+      ↓
+🌧️ ⛰️ 🔑 🌱 🌸 🤝 🛡️ ⚡ 🏛️ ∞ ...
+G  G  G  G  ?  G  G  G  G  G
+               │
+               └── Unknown emoji: mage assigns meaning
+                   based on what you're learning right now
+```
+
+### The Progressive Model
+
+| State | Grimoire (shared) | Learned (yours) | Cosmic (unassigned) |
+|-------|-------------------|-----------------|---------------------|
+| Birth | 38% | 0% | 62% |
+| Progressing | 38% | varies | shrinking |
+| Complete | 38% | 62% | 0% |
+
+Meanings are assigned by YOUR mage based on context:
+- **Which spell you're learning** — concepts color the interpretation
+- **What you're doing** — evocation vs first learning
+- **When it happens** — time and life context
+
+### Data Model
+
+```
+SPELLBOOK_STATE (per mage)
+│ mage_id │ grimoire_pct │ learned_pct │ cosmic_pct │
+
+LEARNED_MEANINGS (unique to each mage)  
+│ mage_id │ emoji │ meaning           │ learned_during │ timestamp │
+
+EVOCATIONS (spell + attribution using YOUR meanings)
+│ evocation │ spell_id │ attribution │ cosmic_seed │ mage_id │ timestamp │
+```
+
+Same emoji, different mages = different meanings = different spellbooks.
 
 ## Core Components
 

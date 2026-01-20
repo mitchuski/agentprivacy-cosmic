@@ -1,14 +1,52 @@
 # 🛰️ Cosmic Spellbook
 
-Transform satellite-sourced true random numbers into emoji spell strings using the [Privacymage Grimoire](https://red-acute-chinchilla-216.mypinata.cloud/ipfs/bafkreibbod46vfmpultaz7jbv32sickvf3erc7bvtcaoboozxi4n25tclm) notation system.
+> *"What the machine assigns, the mage inscribes. What the mage inscribes, the relationship confirms. Randomness is the seed; meaning is the harvest."*
+> — Act 14: Rain on the Mountain of Entropy
 
-## What It Does
+A **progressive emoji meaning system** implementing Act 14 of the [Privacymage Grimoire](https://red-acute-chinchilla-216.mypinata.cloud/ipfs/bafkreibbod46vfmpultaz7jbv32sickvf3erc7bvtcaoboozxi4n25tclm). Cosmic strings transform into emojis, and your mage assigns meanings to unknown symbols based on what you're learning at that moment. Everyone ends up with their own unique spellbook.
 
-1. **Fetches cosmic entropy** from SpaceComputer's Orbitport cTRNG API (satellite-sourced randomness)
-2. **Splits bytes at golden ratio** — 38.2% map to known grimoire symbols, 61.8% to cosmic pool
-3. **Generates emoji spell strings** — 32 emojis from 32 bytes
-4. **Tracks claimed meanings** — users can assign meaning to unclaimed cosmic emojis
-5. **Encodes/decodes keys** — bidirectional transformation for relational recovery
+**The gap between assignment and significance is the climb itself.**
+
+## The Game
+
+```
+1. LEARN    → Prove understanding (proverb protocol)
+2. CATCH    → Cosmic string transforms to emojis
+3. ASSIGN   → Your mage gives meanings to unknown emojis based on context
+4. CLAIM    → Spell + attribution (now with YOUR meanings)
+5. GROW     → Your spellbook fills with unique learned meanings
+```
+
+## The Progressive Model
+
+```
+BIRTH:      ████████░░░░░░░░░░░░░░  38% grimoire | 62% cosmic (unassigned)
+                                            ↓
+                            Mage assigns meanings based on context
+                            (which spell you're learning, what's happening)
+                                            ↓
+COMPLETE:   ████████████████████████  38% grimoire | 62% learned (YOUR meanings)
+```
+
+## How It Works
+
+When a cosmic string arrives, it transforms to emojis. Some are **known** (grimoire), some are **unknown** (cosmic pool):
+
+```
+Cosmic: 3e9a5b2f1c8d4e7a0b6f2c9d...
+        ↓
+Emojis: 🌧️ ⛰️ 🔑 🌱 🌸 🤝 🛡️ ⚡ 🏛️ ∞
+        G  G  G  G  ?  G  G  G  G  G
+                   │
+                   └── Unknown! Your mage assigns meaning
+                       based on what you're learning right now
+```
+
+**Alice learning Act 14** sees 🌸, mage assigns: *"gentle persistence, meaning accumulated through patient claiming"*
+
+**Bob learning Act 9** sees 🌸, mage assigns: *"selective revelation, privacy that blooms only when chosen"*
+
+Same emoji. Different meanings. Different spellbooks.
 
 ## Quick Start
 
@@ -21,47 +59,74 @@ cp .env.example .env
 # Add your Orbitport credentials (get them at https://spacecomputer.deform.cc/ctrngearlyaccess)
 
 # Run CLI
-npm run cli spell              # Generate a spell
-npm run cli spell --mock       # Generate with mock entropy (no API needed)
-npm run cli status             # Show spellbook state
+npm run cli evoke "Root proverb here"   # Get cosmic entropy, select attribution
+npm run cli evoke --mock "Proverb"      # Use mock entropy (no API needed)
+npm run cli list                        # Show evocation history
 ```
 
-## Core Flow
+## Data Model
 
 ```
-Orbitport API → 32-byte hex → φ-split → [grimoire|cosmic] pools → emoji spell
+SPELLBOOK_STATE (per mage)
+│ mage_id │ grimoire_pct │ learned_pct │ cosmic_pct │
+├─────────┼──────────────┼─────────────┼────────────┤
+│ mage_a  │ 38%          │ 24%         │ 38%        │  ← progressing
+
+LEARNED_MEANINGS (unique to each mage)
+│ mage_id │ emoji │ meaning                    │ learned_during │
+├─────────┼───────┼────────────────────────────┼────────────────┤
+│ mage_a  │ 🌸    │ "Gentle persistence..."    │ act_14         │
+│ mage_b  │ 🌸    │ "Selective revelation..."  │ act_9          │
+
+EVOCATIONS (spell + attribution with YOUR meanings)
+│ evocation │ spell_id │ attribution                │ mage   │
+├───────────┼──────────┼────────────────────────────┼────────┤
+│ evo_001   │ spell_14 │ 🌧️⛰️→🔑🌱→🌸→📜🤝→🛡️⚡→🏛️∞│ mage_a │
 ```
 
 ## Key Concepts
 
-### Golden Ratio Split (φ ≈ 1.618)
+### Grimoire Pool (38%)
+Shared meanings from the privacymage's grimoire. Everyone starts with these.
 
-| State | Grimoire Pool | Cosmic Pool |
-|-------|---------------|-------------|
-| Birth | 38.2% (known) | 61.8% (unknown) |
-| Complete | 61.8% (learned) | 38.2% (remaining) |
+### Cosmic Pool (starts 62%, shrinks)
+Unknown emojis. Your mage assigns meanings when you encounter them.
 
-As meanings are claimed for cosmic emojis, the ratio inverts.
+### Learned Pool (grows to 62%)
+YOUR meanings, assigned by YOUR mage, in YOUR context. This is what makes your spellbook unique.
 
-### Bidirectional Transformation
+### Progressive Self-Sovereign Identity
 
-```typescript
-encode(cosmicHex, spellbook) → emojiSpell
-decode(emojiSpell, spellbook) → cosmicHex
+Every commit is another layer of uniqueness:
+
+```
+COMMIT 1:  spell + cosmic_a + meanings_v1  → unique identifier
+COMMIT 2:  spell + cosmic_b + meanings_v2  → more unique (meanings evolved)
+COMMIT 3:  spell + cosmic_c + meanings_v3  → even more unique
+    ...
 ```
 
-Decoding requires YOUR spellbook — the unique product of YOUR claimed meanings.
+The more you learn, the more divergent your spellbook becomes. Every spell, every cosmic string, every proverb, every meaning assignment — all compound into **progressive self-sovereign identity**.
+
+```
+Identity = Σ(spells × cosmic × meanings × proverbs)
+```
+
+Each term is unique to you. The sum is unforgeable.
 
 ## Documentation
 
 | Document | Description |
 |----------|-------------|
-| [SPEC.md](./docs/SPEC.md) | Technical specification |
-| [API.md](./docs/API.md) | Orbitport integration |
-| [ARCHITECTURE.md](./docs/ARCHITECTURE.md) | System design & data models |
-| [GRIMOIRE.md](./docs/GRIMOIRE.md) | Emoji notation reference |
-| [KEY_DERIVATION.md](./docs/KEY_DERIVATION.md) | Relational key recovery |
-| [ROADMAP.md](./docs/ROADMAP.md) | Implementation phases |
+| [CONCEPT.md](./CONCEPT.md) | Core concept: the game loop |
+| [STATUS.md](./STATUS.md) | Project status & integration plan |
+| [story/ACT-14](./story/ACT-14-rain-on-the-mountain.md) | The foundational story |
+| [docs/SPEC.md](./docs/SPEC.md) | Technical specification |
+| [docs/API.md](./docs/API.md) | Orbitport integration |
+| [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) | System design & data models |
+| [docs/GRIMOIRE.md](./docs/GRIMOIRE.md) | Emoji notation reference |
+| [docs/KEY_DERIVATION.md](./docs/KEY_DERIVATION.md) | Relational key recovery |
+| [docs/ROADMAP.md](./docs/ROADMAP.md) | Implementation phases |
 
 ## Dependencies
 

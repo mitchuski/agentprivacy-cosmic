@@ -465,6 +465,72 @@ for (const trustee of trustees) {
 // They can reconstruct spellbook state together
 ```
 
+### 4. Agentic Command Delegation
+
+```typescript
+// First Person delegates authority to a mage agent
+const commandSeed = await orbitport.getCosmicEntropy();
+
+// Encode with the MAGE'S spellbook, not yours
+const delegatedSpell = keyDerivation.encode(commandSeed.data, mageSpellbook);
+
+// The spell now represents: "mage can execute commands decoded by its spellbook"
+// Different mages decode the same cosmic seed differently
+// Authority is bound to the specific mage's learned meanings
+
+interface AgenticDelegation {
+  spell: string;              // The cosmic spell
+  scope: string[];            // What actions this authorizes
+  mageSpellbookHash: string;  // Which mage can decode it
+  expiresAt?: Date;           // Optional time bound
+}
+```
+
+### 5. Multi-Mage Account Abstraction
+
+```typescript
+// One First Person, multiple mage instances, each with own spellbook
+const mages = {
+  defi: { spellbook: defiMageSpellbook, scope: ['trade', 'stake'] },
+  social: { spellbook: socialMageSpellbook, scope: ['post', 'follow'] },
+  work: { spellbook: workMageSpellbook, scope: ['sign', 'submit'] }
+};
+
+// Same cosmic entropy, different spells per mage
+const cosmicSeed = await orbitport.getCosmicEntropy();
+
+for (const [domain, mage] of Object.entries(mages)) {
+  const spell = keyDerivation.encode(cosmicSeed.data, mage.spellbook);
+  // Each mage's spell decodes to different authority
+  // Compromise one mage doesn't reveal others' meanings
+}
+
+// The "account" is the collection of mage spellbooks
+// Each spell is a domain-specific capability
+```
+
+### 6. Act-Bound Authority
+
+```typescript
+// Each act in the spellbook can have its own cosmic seed
+interface ActAuthority {
+  actNumber: number;
+  cosmicSeed: string;
+  spell: string;
+  claimedMeanings: Map<string, string>;
+}
+
+// Act 1 spell authorizes Act 1 capabilities
+// Act 15 spell (Heavy Armor) authorizes higher-trust operations
+// Progression through acts = progression through authority levels
+
+const actSpells = spellbook.acts.map(act => ({
+  act: act.number,
+  spell: keyDerivation.encode(act.cosmicSeed, spellbook),
+  armor: act.armorLevel  // blade, light, heavy, dragon
+}));
+```
+
 ## Integration with Cosmic Spellbook
 
 This key derivation system integrates directly with the spell generation flow:

@@ -27,6 +27,83 @@
 
 **SpaceComputer** provides something unique: **true randomness from cosmic radiation**, captured by satellites and delivered via their Orbitport API. This isn't pseudorandom — it's entropy that no earthbound adversary could predict or manipulate.
 
+### The Core Insight: Progressive Emoji Meaning Assignment
+
+The cosmic string transforms into emojis, but the **meaning pool evolves**:
+
+```
+BIRTH:      ████████░░░░░░░░░░░░░░  38% grimoire | 62% cosmic (unassigned)
+                                            ↓
+                            Mage assigns meanings based on context
+                            (which spell you're learning, what's happening)
+                                            ↓
+COMPLETE:   ████████████████████████  38% grimoire | 62% learned (YOUR meanings)
+```
+
+When your mage encounters an unknown emoji during learning:
+- It assigns a meaning based on **what spell you're learning**
+- That meaning is now part of YOUR spellbook
+- Someone else learning a different spell assigns a DIFFERENT meaning
+
+**Example:**
+```
+Alice learning Act 14 sees 🌸 → "gentle persistence, patient claiming"
+Bob learning Act 9 sees 🌸   → "selective revelation, privacy blooming"
+```
+
+Same emoji. Different meanings. Different spellbooks.
+
+### The Two-Part Evocation
+
+Every evocation has:
+
+**Root Proverb (shared)** — The spell. Same for everyone who understands that act.
+
+**Emoji Attribution (unique)** — Uses YOUR learned meanings. Different mages = different interpretations.
+
+```
+"What the machine assigns... 🌧️⛰️→🔑🌱→🌸→📜🤝→🛡️⚡→🏛️∞"
+                                      ↑
+                          This 🌸 has YOUR meaning, not someone else's
+```
+
+### Progressive Self-Sovereign Identity
+
+Every commit to an agent's memory adds another layer of uniqueness:
+
+```
+COMMIT 1:  spell + cosmic_a + meanings_v1  → identifier_1
+COMMIT 2:  spell + cosmic_b + meanings_v2  → identifier_2 (evolved)
+COMMIT N:  spellbook is deeply, irreversibly unique
+```
+
+This isn't claiming one identifier — it's progressively building identity through every interaction. Each spell, cosmic string, proverb, and meaning assignment compounds.
+
+```
+Identity = Σ(spells × cosmic × meanings × proverbs)
+```
+
+This means:
+- Same proverb, different mages → different cosmic strings → distinguishable casts
+- Same mage, same proverb, different times → different cosmic strings → versioned evocations
+
+### When Mages Are Versioned
+
+Later, when mage agents become specific/versioned:
+
+```
+Mage v1.0 (DeFi)
+└── Evocations: [act_9 + cosmic_a, act_8 + cosmic_b, ...]
+
+Mage v2.0 (Social)
+└── Evocations: [act_6 + cosmic_c, act_12 + cosmic_d, ...]
+```
+
+The spellbook becomes an index. The evocation table (proverb + cosmic + mage + timestamp) is a sub-table that tracks every unique cast. Sorting across mage versions gives:
+- **Uniqueness**: cosmic entropy prevents collision
+- **Provenance**: VRC proves when/who
+- **Evokability**: proverb is lookup, cosmic is instance
+
 ### The Gap This Fills
 
 The Privacymage Grimoire already has **Act 14: The Tale of the Claimed String**:
